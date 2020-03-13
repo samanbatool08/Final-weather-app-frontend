@@ -180,61 +180,81 @@ class App extends React.Component {
   render() {
     return(
       <div>
-        <Titles />
-        <Form 
-        getWeather={this.getWeather}
-        getWeeklyWeather={this.getWeeklyWeather}/>
-        <Weather 
-        todaysDate={this.state.todaysDate}
-        temperature={this.state.temperature}
-        city={this.state.city}
-        state={this.state.state}
-        humidity={this.state.humidity}
-        description={this.state.description}
+        <div className="wrapper">
+          <div className="main">
+            {/* <div className="container"> */}
+              <div className="row">
+                <div className="col-xs-5 title-container">
+                  <Titles 
+                  todaysDate={this.state.todaysDate}
+                  temperature={this.state.temperature}
+                  city={this.state.city}
+                  state={this.state.state}
+                  humidity={this.state.humidity}
+                  description={this.state.description}
+                  />
+                </div>
 
-        tomorrowsDate={this.state.tomorrowsDate}
-        tomorrowMorningTemperature={this.state.tomorrowMorningTemperature}
-        tomorrowMorningHumidity={this.state.tomorrowMorningHumidity}
-        tomorrowMorningDescription={this.state.tomorrowMorningDescription}
-        tomorrowEveningTemperature={this.state.tomorrowEveningTemperature}
-        tomorrowEveningHumidity={this.state.tomorrowEveningHumidity}
-        tomorrowEveningDescription={this.state.tomorrowEveningDescription}
+                <div className="col-xs-7 form-container">
+                  <Form 
+                  getWeather={this.getWeather}
+                  getWeeklyWeather={this.getWeeklyWeather}/>
+                  <Weather 
+                  todaysDate={this.state.todaysDate}
+                  temperature={this.state.temperature}
+                  city={this.state.city}
+                  state={this.state.state}
+                  humidity={this.state.humidity}
+                  description={this.state.description}
 
-        twoDaysFromNowDate={this.state.twoDaysFromNowDate}
-        twoDayMorningTemperature={this.state.twoDayMorningTemperature}
-        twoDayMorningHumidity={this.state.twoDayMorningHumidity} 
-        twoDayMorningDescription={this.state.twoDayMorningDescription}
-        twoDayEveningTemperature={this.state.twoDayEveningTemperature}
-        twoDayEveningHumidity={this.state.twoDayEveningHumidity} 
-        twoDayEveningDescription={this.state.twoDayEveningDescription}
+                  tomorrowsDate={this.state.tomorrowsDate}
+                  tomorrowMorningTemperature={this.state.tomorrowMorningTemperature}
+                  tomorrowMorningHumidity={this.state.tomorrowMorningHumidity}
+                  tomorrowMorningDescription={this.state.tomorrowMorningDescription}
+                  tomorrowEveningTemperature={this.state.tomorrowEveningTemperature}
+                  tomorrowEveningHumidity={this.state.tomorrowEveningHumidity}
+                  tomorrowEveningDescription={this.state.tomorrowEveningDescription}
 
-        threeDaysFromNowDate={this.state.threeDaysFromNowDate}
-        threeDayMorningTemperature={this.state.threeDayMorningTemperature}
-        threeDayMorningHumidity={this.state.threeDayMorningHumidity} 
-        threeDayMorningDescription={this.state.threeDayMorningDescription}
-        threeDayEveningTemperature={this.state.threeDayEveningTemperature}
-        threeDayEveningHumidity={this.state.threeDayEveningHumidity} 
-        threeDayEveningDescription={this.state.threeDayEveningDescription}
+                  twoDaysFromNowDate={this.state.twoDaysFromNowDate}
+                  twoDayMorningTemperature={this.state.twoDayMorningTemperature}
+                  twoDayMorningHumidity={this.state.twoDayMorningHumidity} 
+                  twoDayMorningDescription={this.state.twoDayMorningDescription}
+                  twoDayEveningTemperature={this.state.twoDayEveningTemperature}
+                  twoDayEveningHumidity={this.state.twoDayEveningHumidity} 
+                  twoDayEveningDescription={this.state.twoDayEveningDescription}
 
-        fourDaysFromNowDate={this.state.fourDaysFromNowDate}
-        fourDayMorningTemperature={this.state.fourDayMorningTemperature}
-        fourDayMorningHumidity={this.state.fourDayMorningHumidity} 
-        fourDayMorningDescription={this.state.fourDayMorningDescription}
-        fourDayEveningTemperature={this.state.fourDayEveningTemperature}
-        fourDayEveningHumidity={this.state.fourDayEveningHumidity} 
-        fourDayEveningDescription={this.state.fourDayEveningDescription}
+                  threeDaysFromNowDate={this.state.threeDaysFromNowDate}
+                  threeDayMorningTemperature={this.state.threeDayMorningTemperature}
+                  threeDayMorningHumidity={this.state.threeDayMorningHumidity} 
+                  threeDayMorningDescription={this.state.threeDayMorningDescription}
+                  threeDayEveningTemperature={this.state.threeDayEveningTemperature}
+                  threeDayEveningHumidity={this.state.threeDayEveningHumidity} 
+                  threeDayEveningDescription={this.state.threeDayEveningDescription}
 
-        fiveDaysFromNowDate={this.state.fiveDaysFromNowDate}
-        fiveDayMorningTemperature={this.state.fiveDayMorningTemperature}
-        fiveDayMorningHumidity={this.state.fiveDayMorningHumidity} 
-        fiveDayMorningDescription={this.state.fiveDayMorningDescription}
-        fiveDayEveningTemperature={this.state.fiveDayEveningTemperature}
-        fiveDayEveningHumidity={this.state.fiveDayEveningHumidity} 
-        fiveDayEveningDescription={this.state.fiveDayEveningDescription}
+                  fourDaysFromNowDate={this.state.fourDaysFromNowDate}
+                  fourDayMorningTemperature={this.state.fourDayMorningTemperature}
+                  fourDayMorningHumidity={this.state.fourDayMorningHumidity} 
+                  fourDayMorningDescription={this.state.fourDayMorningDescription}
+                  fourDayEveningTemperature={this.state.fourDayEveningTemperature}
+                  fourDayEveningHumidity={this.state.fourDayEveningHumidity} 
+                  fourDayEveningDescription={this.state.fourDayEveningDescription}
 
-        error={this.state.error}
-        />
+                  fiveDaysFromNowDate={this.state.fiveDaysFromNowDate}
+                  fiveDayMorningTemperature={this.state.fiveDayMorningTemperature}
+                  fiveDayMorningHumidity={this.state.fiveDayMorningHumidity} 
+                  fiveDayMorningDescription={this.state.fiveDayMorningDescription}
+                  fiveDayEveningTemperature={this.state.fiveDayEveningTemperature}
+                  fiveDayEveningHumidity={this.state.fiveDayEveningHumidity} 
+                  fiveDayEveningDescription={this.state.fiveDayEveningDescription}
 
+                  error={this.state.error}
+                  />
+        
+                </div>
+              </div>
+             {/* </div> */}
+          </div>
+        </div>
       </div>
     )
   }
