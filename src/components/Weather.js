@@ -17,7 +17,7 @@ const Weather = (props) => {
                     {props.tomorrowMorningDescription && <p>Tomorrow Morning Conditions: {props.tomorrowMorningDescription}</p>}
                     <br />
                     {props.tomorrowEveningTemperature && <p>Tomorrow Evening Temperature: {(((props.tomorrowEveningTemperature) - 273.15) * 9/5 +32).toFixed(2)} degrees Farenheit</p>}
-                    {props.tomorrowEveningHumidity && <p>Tomorrow Evening Humidity: {props.tomorrowEveningHumidity} % </p>}
+                    {props.tomorrowEveningHumidity && <p>Tomorrow Evening Humidity: {props.tomorrowEveningHumidity}</p>}
                     {props.tomorrowEveningDescription && <p>Tomorrow Evening Conditions: {props.tomorrowEveningDescription}</p>}
                 </div>
 

@@ -3,6 +3,7 @@ import React from 'react';
 import Titles from './components/Titles';
 import Form from './components/Form'
 import Weather from './components/Weather'
+import ActivitiesList from './components/ActivitiesList'
 
 
 const API_KEY = "c464dbd6a0a531bfe5beedbb84bb9f0e";
@@ -14,6 +15,8 @@ class App extends React.Component {
     temperature: undefined,
     city: undefined,
     state: undefined, 
+    latitude: undefined,
+    longitude: undefined,
     humidity: undefined, 
     description: undefined,
     
@@ -57,8 +60,17 @@ class App extends React.Component {
     fiveDayEveningHumidity: undefined, 
     fiveDayEveningDescription: undefined,
 
-    error: ""
+    error: "",
+
+    showingActivities: false,
+    username: "",
   }
+
+  showActivities = () => {
+    this.setState({
+        showingActivities: !this.state.showingActivities
+    })
+}
 
   getWeather = async (e) => {
     e.preventDefault();
@@ -67,12 +79,15 @@ class App extends React.Component {
     const api_call = await fetch(`http://api.openweathermap.org/data/2.5/forecast?q=${city},${state}&appid=${API_KEY}&mode=json`)
     const data = await api_call.json()
     if (city && state) {
-    console.log(data)
+    console.log(data, "here is the object")
+    console.log(data.city.coord.lon, data.city.coord.lat)
     this.setState({
       todaysDate: data.list[0].dt_txt,
       temperature: data.list[0].main.temp,
       city: data.city.name,
       state: data.city.country,
+      latitude: data.city.coord.lat,
+      longitude: data.city.coord.lon,
       humidity: data.list[0].main.humidity, 
       description: data.list[0].weather[0].description,
 
@@ -116,6 +131,8 @@ class App extends React.Component {
       fiveDayEveningHumidity: data.list[39].main.humidity, 
       fiveDayEveningDescription: data.list[39].weather[0].description,
 
+      
+
     error: ""
     })
   } else {
@@ -124,6 +141,8 @@ class App extends React.Component {
       temperature: undefined,
       city: undefined,
       state: undefined,
+      latitude: undefined,
+      longitude: undefined,
       humidity: undefined, 
       description: undefined,
 
@@ -171,20 +190,26 @@ class App extends React.Component {
       error: "Please enter a value."
     })
   }
+
+
 }
 
+render() {
 
+  console.log(((this.state.temperature) - 273) * 9/5 + 32)
+  console.log('showing', this.state.showingActivities)
+  console.log("LAT", this.state.latitude)
+  console.log("LONG", this.state.longitude)
 
-
-
-  render() {
     return(
       <div>
         <div className="wrapper">
           <div className="main">
-            {/* <div className="container"> */}
-              <div className="row">
-                <div className="col-xs-5 title-container">
+              {/* <div className="row"> */}
+  
+                {(((this.state.temperature) - 273) * 9/5 + 32) >= 70 ? 
+                <div 
+              className="col-xs-5 title-container sunny-image"  >
                   <Titles 
                   todaysDate={this.state.todaysDate}
                   temperature={this.state.temperature}
@@ -192,13 +217,42 @@ class App extends React.Component {
                   state={this.state.state}
                   humidity={this.state.humidity}
                   description={this.state.description}
+                  showingActivities={this.state.showingActivities}
+                  showActivities={this.showActivities}
                   />
-                </div>
+                </div> 
+                : 
+                <div className="col-xs-5 title-container default-image">
+                  <Titles 
+                  todaysDate={this.state.todaysDate}
+                  temperature={this.state.temperature}
+                  city={this.state.city}
+                  state={this.state.state}
+                  humidity={this.state.humidity}
+                  description={this.state.description}
+                  showingActivities={this.state.showingActivities}
+                  showActivities={this.showActivities}
+                  />
+              </div>}
+                
 
                 <div className="col-xs-7 form-container">
                   <Form 
                   getWeather={this.getWeather}
                   getWeeklyWeather={this.getWeeklyWeather}/>
+
+                {this.state.showingActivities ? 
+                <ActivitiesList 
+                temperature={this.state.temperature}
+                latitude={this.state.latitude}
+                longitude={this.state.longitude}
+                city={this.state.city}
+                state={this.state.state}
+                todaysDate={this.state.todaysDate}
+
+
+                /> 
+                :
                   <Weather 
                   todaysDate={this.state.todaysDate}
                   temperature={this.state.temperature}
@@ -249,9 +303,10 @@ class App extends React.Component {
 
                   error={this.state.error}
                   />
+                }
         
                 </div>
-              </div>
+              {/* </div> */}
              {/* </div> */}
           </div>
         </div>

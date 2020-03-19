@@ -22,9 +22,16 @@ body {
   margin: 0 auto;
 }
 
+.default-image {
+  background: url("image/weather-background.jpg") center center no-repeat;
+}
+
+.sunny-image {
+  background: url("image/sunny-1.jpg") center center no-repeat;
+}
+
 .title-container {
   height: 90vh;
-  background: url("image/weather-background.jpg") center center no-repeat;
   background-size: cover;
   display: flex;
   align-items: center;
@@ -32,6 +39,7 @@ body {
   text-align: center;
   color: #000;
 }
+
 
 .title-container__title {
   font-size: 50px;
@@ -149,3 +157,23 @@ button:active {
   letter-spacing: 1px;
   font-weight: 200;
 }
+
+
+.activity__list__header {
+  display: flex;
+  flex-wrap: wrap;
+  width: 80%;
+  font-size: 14px;
+  font-weight: 200;
+  letter-spacing: 2px;
+  color: white
+}
+
+.indoor {
+  color: white
+}
+
+.outdoor {
+  color: white
+}
+
