@@ -3,141 +3,224 @@ import RestaurantShow from './RestaurantShow';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import PlacesAutoComplete, { geocodeByAddress, getLatLng } from 'react-places-autocomplete'; 
 
-const ActivitiesList = (props) => {
+class ActivitiesList extends React.Component {
 
-    const [address, setAddress] = React.useState("")
-    const [coordinates, setCoordinates] = React.useState({
-        lat: null,
-        lng: null
-    })
-  
-
-    const handleSelect = async (value) => { 
-        const result = await geocodeByAddress(value)
-        const latLng = await getLatLng(result[0])
-        setAddress(value)
-        setCoordinates(latLng)
+    state = { 
+        nearbyRestaurants: [],
+        nearbyMuseums: [], 
+        nearbyGyms: [],
+        nearbyLibraries: [],
+        nearbyBowling: [],
+        nearbyMovies: [],
+        nearbyParks: [],
+        nearbyBars: [],
+        nearbyCafes: []
     }
-    // state = {
-    //     nearbyRestaurants: [],
-    //     userActitivities: []
-    // }
 
-    // getRestaurants = () => {
-    //     const Zomato = require('zomato.js');
-    //     const z = new Zomato('7a8cbeadc0d0ac16a478adc2a8517ca5');
-    //     z
-    //     .search({
-    //         lat: this.props.latitude,
-    //         lon: this.props.longitude,
-    //         // radius: 5,
-    //         count: 5
-    //       })
-    //     .then((nearbyRestaurants) => {
-    //         this.setState({nearbyRestaurants}) 
-    //         console.log('second', this.state.nearbyRestaurants)
-    //       })
-    //       .catch(function(err) {
-    //         console.error(err);
-    //       });
+    render() {
 
-    // }
+        const PLACES_KEY = ""
+    
+    const getRestaurants = () => {
+        const proxyurl = "https://cors-anywhere.herokuapp.com/";
+        const url = `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${this.props.latitude},${this.props.longitude}&radius=500&type=restaurant&key=${PLACES_KEY}`
+        fetch(proxyurl + url)
+        .then(resp => resp.json())
+        .then((nearbyRestaurants) => {
+            console.log('nearbyrest', nearbyRestaurants)
+            this.setState({nearbyRestaurants})
+        })
+    }
+
+    const getMuseums = () => {
+        const proxyurl = "https://cors-anywhere.herokuapp.com/";
+        const url = `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${this.props.latitude},${this.props.longitude}&radius=500&type=museum&key=${PLACES_KEY}`
+        fetch(proxyurl + url)
+        .then(resp => resp.json())
+        .then((nearbyMuseums) => {
+            console.log('nearbyMuseums', nearbyMuseums)
+            this.setState({nearbyMuseums})
+        })
+    }
+
+    const getGyms = () => {
+        const proxyurl = "https://cors-anywhere.herokuapp.com/";
+        const url = `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${this.props.latitude},${this.props.longitude}&radius=500&type=gym&key=${PLACES_KEY}`
+        fetch(proxyurl + url)
+        .then(resp => resp.json())
+        .then((nearbyGyms) => {
+            console.log('nearbyGyms', nearbyGyms)
+            this.setState({nearbyGyms})
+        })
+    }
+
+    const getLibraries = () => {
+        const proxyurl = "https://cors-anywhere.herokuapp.com/";
+        const url = `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${this.props.latitude},${this.props.longitude}&radius=500&type=library&key=${PLACES_KEY}`
+        fetch(proxyurl + url)
+        .then(resp => resp.json())
+        .then((nearbyLibraries) => {
+            console.log('nearbyLibraries', nearbyLibraries)
+            this.setState({nearbyLibraries})
+        })
+    }
+    
+
+    const getBowling = () => {
+        const proxyurl = "https://cors-anywhere.herokuapp.com/";
+        const url = `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${this.props.latitude},${this.props.longitude}&radius=1500&type=bowling_alley&key=${PLACES_KEY}`
+        fetch(proxyurl + url)
+        .then(resp => resp.json())
+        .then((nearbyBowling) => {
+            console.log('nearbyBowling', nearbyBowling)
+            this.setState({nearbyBowling})
+        })
+    }
+
+    const getMovies = () => {
+        const proxyurl = "https://cors-anywhere.herokuapp.com/";
+        const url = `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${this.props.latitude},${this.props.longitude}&radius=1500&type=movie_theater&key=${PLACES_KEY}`
+        fetch(proxyurl + url)
+        .then(resp => resp.json())
+        .then((nearbyMovies) => {
+            console.log('nearbyMovies', nearbyMovies)
+            this.setState({nearbyMovies})
+        })
+    }
+    
+    const getParks = () => {
+        const proxyurl = "https://cors-anywhere.herokuapp.com/";
+        const url = `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${this.props.latitude},${this.props.longitude}&radius=1500&type=park&key=${PLACES_KEY}`
+        fetch(proxyurl + url)
+        .then(resp => resp.json())
+        .then((nearbyParks) => {
+            console.log('nearbyParks', nearbyParks)
+            this.setState({nearbyParks})
+        })
+    }
+
+    const getBars = () => {
+        const proxyurl = "https://cors-anywhere.herokuapp.com/";
+        const url = `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${this.props.latitude},${this.props.longitude}&radius=1500&type=bar&key=${PLACES_KEY}`
+        fetch(proxyurl + url)
+        .then(resp => resp.json())
+        .then((nearbyBars) => {
+            console.log('nearbyBars', nearbyBars)
+            this.setState({nearbyBars})
+        })
+    }
+    
+
+    const getCafes = () => {
+        const proxyurl = "https://cors-anywhere.herokuapp.com/";
+        const url = `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${this.props.latitude},${this.props.longitude}&radius=1500&type=cafe&key=${PLACES_KEY}`
+        fetch(proxyurl + url)
+        .then(resp => resp.json())
+        .then((nearbyCafes) => {
+            console.log('nearbyCafes', nearbyCafes)
+            this.setState({nearbyCafes})
+        })
+    }
 
 
     // postActivity = () => {
-    //     fetch(`http://localhost:3000/activities`,{
-    //     method: "POST",
-    //     headers: {'content-type': 'application/json',
-    //             accepts: 'application/json'},
-    //     body: JSON.stringify({
-    //         location: this.props.city,
-    //         name: "restaurant",
-    //         date: this.props.todaysDate,
-    //         info: "cuisine here"
-    //     })}
-    //     )
-    //     .then(resp => resp.json())
-    //     .then(newActivity => {
-    //         this.setState({userActitivities: [...this.state.userActitivities, newActivity]})
-    //     })
+        //     fetch(`http://localhost:3000/activities`,{
+            //     method: "POST",
+            //     headers: {'content-type': 'application/json',
+            //             accepts: 'application/json'},
+            //     body: JSON.stringify({
+                //         location: this.props.city,
+                //         name: "restaurant",
+                //         date: this.props.todaysDate,
+                //         info: "cuisine here"
+                //     })}
+                //     )
+                //     .then(resp => resp.json())
+                //     .then(newActivity => {
+                    //         this.setState({userActitivities: [...this.state.userActitivities, newActivity]})
+                    //     })
+                    // }
+                    
+                    
+                    
+                    
+                    
+                    console.log('in activities', (((this.props.temperature) - 273.15) * 9/5 +32))
+                    console.log('in activities', this.props.latitude)
+                    console.log('in activities', this.props.longitude)
+                    
+                    
+                    const temp = (((this.props.temperature) - 273.15) * 9/5 +32)
+                    
+                    return(
+                        <div>
+            <h2>Activities near you</h2>
+            <p onClick={() => getRestaurants()}>Restaurants</p>
+            {this.state.nearbyRestaurants.length !== 0 && <RestaurantShow />}
+
+            <p onClick={() => getMuseums()}>Museums</p>
+            {this.state.nearbyMuseums.length !== 0 && <RestaurantShow />}
+
+            <p onClick={() => getGyms()}>Gym</p>
+
+            <p onClick={() => getLibraries()}>Libraries</p>
+
+            <p onClick={() => getBowling()}>Bowling</p>
+
+            <p onClick={() => getMovies()}>Movies</p>
+
+            <p onClick={() => getParks()}>Parks</p>
+
+            <p onClick={() => getBars()}>Bars</p>
+
+            <p onClick={() => getCafes()}>Cafes</p>
+
+        </div>
+    
+    )
+}
+}
+
+
+export default ActivitiesList;
+
+
+{/* 
+    // const [address, setAddress] = React.useState("")
+    // const [coordinates, setCoordinates] = React.useState({
+    //     lat: null,
+    //     lng: null
+    // })
+    
+    
+    // const handleSelect = async (value) => { 
+    //     const result = await geocodeByAddress(value)
+    //     const latLng = await getLatLng(result[0])
+    //     setAddress(value)
+    //     setCoordinates(latLng)
     // }
-    
-    
 
-        // const url = "https://example.com"; // site that doesn’t send Access-Control-*
-        // fetch(proxyurl + url) // https://cors-anywhere.herokuapp.com/https://example.com
-        // .then(response => response.text())
-        // .then(contents => console.log(contents))
-        // .catch(() => console.log("Can’t access " + url + " response. Blocked by browser?"))
+
+
+
+
+
+
+    <PlacesAutoComplete 
+    value={address} 
+    onChange={setAddress} 
+    onSelect={handleSelect}> 
+    {({getInputProps, suggestions, getSuggestionItemProps, loading}) => 
+    (<div>
+        <p>Latitude: {coordinates.lat}</p>
+        <p>Longitude: {coordinates.lng}</p>
         
-        // let today = new Date('05 October 2011 14:48 UTC');
-        // let ISO = today.toISOString()
-        // const proxyurl = "https://cors-anywhere.herokuapp.com/";
-        // const url = "https://api-gate2.movieglu.com/cinemasNearby/?n=5";
-        // const fetchURL = (proxyurl + url)
-
-        // const options = {
-        //     method: 'GET',
-        //     headers: {
-        //         client: "FLAT_3",
-        //         "x-api-key": "DrvxcsYlMQ1e7aHLTwi7NBLOcStOGkN5tPw3V946",
-        //         "authorization": "Basic RkxBVF8zOklaRmxZeVU2TVFNNw==",
-        //         "api-version": "v200",
-        //         "territory": "US",
-        //         "geolocation": `${40.592091};${-73.582619}`,
-        //         "device-datetime": `${ISO}`	
-        //         }
-        // };
-     
-
-        //     fetch(fetchURL, options)        
-        //     .then( res => res.json())
-        //     .then( data => console.log('movies', data))
-            // .catch(() => console.log("Can't access " + url + " response. Blocked by browser?"))
-    
-
-        // $.ajax({
-        //     type: "GET",
-        //     url: "https://api-gate2.movieglu.com/cinemasNearby/?n=5",
-        //     data: {
-        //         client: "FLAT_3",
-        //         x-api-key: "DrvxcsYlMQ1e7aHLTwi7NBLOcStOGkN5tPw3V946"
-        //         "authorization: Basic RkxBVF8zOklaRmxZeVU2TVFNNw=="
-        //         "territory: US"
-        //         `geolocation: ${this.props.latitude};${this.props.longitude}`
-        //         `device-datetime: ${ISO}`	
-        //     },
-        //     success: function(data) {
-        //       console.log(data);
-        //       //do something when request is successfull
-        //     },
-        //     dataType: "json"
-        //   });
-
-    // console.log('in activities', (((this.props.temperature) - 273.15) * 9/5 +32))
-    // console.log('in activities', this.props.latitude)
-    // console.log('in activities', this.props.longitude)
-    // console.log('first', this.state.nearbyRestaurants)
-
-    
-    // const temp = (((this.props.temperature) - 273.15) * 9/5 +32)
-
-    return(
+        <input {...getInputProps({placeholder: "Type Address"})} />
         <div>
-            <PlacesAutoComplete 
-                value={address} 
-                onChange={setAddress} 
-                onSelect={handleSelect}> 
-                {({getInputProps, suggestions, getSuggestionItemProps, loading}) => 
-                (<div>
-                    <p>Latitude: {coordinates.lat}</p>
-                    <p>Longitude: {coordinates.lng}</p>
-
-                    <input {...getInputProps({placeholder: "Type Address"})} />
-                    <div>
-                        {loading ? <div>...loading</div> : null}
-
+        {loading ? <div>...loading</div> : null}
+        
                         {suggestions.map((suggestion) => {
+                            console.log(suggestion)
                             const style = {
                                 backgroundColor: suggestion.active ? "#fff" :null
                             }
@@ -146,46 +229,4 @@ const ActivitiesList = (props) => {
                     </div>
                 </div>)}
 
-            </PlacesAutoComplete>
-        </div>
-        // <div>
-        // {(temp <= 50) ?
-        //     <div className="activity__list">
-        //     <div className="activity__list__header">
-        //         <h1>Indoor Activities List</h1>
-        //     </div>
-        //         <div className="indoor">
-        //             <h2 onClick={() => this.getRestaurants()}>Restaurants near you</h2>
-        //             {(this.state.nearbyRestaurants.length !== 0) ? <RestaurantShow nearbyRestaurants={this.state.nearbyRestaurants} userActitivities={this.state.userActitivities} 
-        //             postActivity={this.postActivity} /> :  
-        //             <div>
-        //             <h2>Movies near you</h2>
-        
-        //             <h2>Indoor Sport & Fitness Centers near you</h2>
-        //             </div>
-        //             }  
-        //         </div>
-        //     </div>
-        //     :
-        //     <div className="activity__list">
-        //     <div className="activity__list__header">
-        //         <h1>Outdoor Activities List</h1>
-        //     </div>
-        //         <div className="outdoor">
-        //             <h2>Parks & Recreation near you</h2>
-
-        //             <h2>Fishing/Camping near you</h2>
-
-        //             <h2>Beaches near you</h2>
-                
-        //         </div>
-        //         <h3></h3>
-        //     </div>
-        //     }
-        // </div>
-    )
-    }
-
-
-export default ActivitiesList;
-
+            </PlacesAutoComplete> */}
