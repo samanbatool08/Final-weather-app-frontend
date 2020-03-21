@@ -170,10 +170,22 @@ button:active {
 }
 
 .activites {
-    color: #61dafb;
+  background-color: white;
 }
 
 .outdoor {
   color: white
+}
+
+
+.login-modal {
+  /* takes it out of the normal doc flow, places it in a pixel coord */
+  position: fixed; 
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 2;
+  background: #cccccccc;
 }
 
