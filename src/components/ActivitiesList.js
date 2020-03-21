@@ -1,25 +1,31 @@
 import React from 'react'; 
-import RestaurantShow from './RestaurantShow';
+import ActivityShow from './ActivityShow';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import PlacesAutoComplete, { geocodeByAddress, getLatLng } from 'react-places-autocomplete'; 
 
 class ActivitiesList extends React.Component {
 
     state = { 
-        nearbyRestaurants: [],
-        nearbyMuseums: [], 
-        nearbyGyms: [],
-        nearbyLibraries: [],
-        nearbyBowling: [],
-        nearbyMovies: [],
-        nearbyParks: [],
-        nearbyBars: [],
-        nearbyCafes: []
+        // nearby: {}
+
+
+        // nearbyRestaurants: [],
+        // nearbyMuseums: [], 
+        // nearbyGyms: [],
+        // nearbyLibraries: [],
+        // nearbyBowling: [],
+        // nearbyMovies: [],
+        // nearbyParks: [],
+        // nearbyBars: [],
+        // nearbyCafes: []
+
+        activities: [],
+        key: ""
     }
 
     render() {
 
-        const PLACES_KEY = ""
+        const PLACES_KEY = "AIzaSyBeZSj15N3z9iD0tqyGFcxTqiUW8HqfeZk"
     
     const getRestaurants = () => {
         const proxyurl = "https://cors-anywhere.herokuapp.com/";
@@ -28,7 +34,8 @@ class ActivitiesList extends React.Component {
         .then(resp => resp.json())
         .then((nearbyRestaurants) => {
             console.log('nearbyrest', nearbyRestaurants)
-            this.setState({nearbyRestaurants})
+            this.setState({activities: nearbyRestaurants, 
+                            type: "restaurants"})
         })
     }
 
@@ -39,7 +46,8 @@ class ActivitiesList extends React.Component {
         .then(resp => resp.json())
         .then((nearbyMuseums) => {
             console.log('nearbyMuseums', nearbyMuseums)
-            this.setState({nearbyMuseums})
+            this.setState({activities: nearbyMuseums,
+                            type: "museums"})
         })
     }
 
@@ -50,7 +58,8 @@ class ActivitiesList extends React.Component {
         .then(resp => resp.json())
         .then((nearbyGyms) => {
             console.log('nearbyGyms', nearbyGyms)
-            this.setState({nearbyGyms})
+            this.setState({activities: nearbyGyms,
+                            type: "gyms"})
         })
     }
 
@@ -61,7 +70,8 @@ class ActivitiesList extends React.Component {
         .then(resp => resp.json())
         .then((nearbyLibraries) => {
             console.log('nearbyLibraries', nearbyLibraries)
-            this.setState({nearbyLibraries})
+            this.setState({activities: nearbyLibraries,
+                            type: "libraries"})
         })
     }
     
@@ -73,7 +83,8 @@ class ActivitiesList extends React.Component {
         .then(resp => resp.json())
         .then((nearbyBowling) => {
             console.log('nearbyBowling', nearbyBowling)
-            this.setState({nearbyBowling})
+            this.setState({activities: nearbyBowling,
+                            type: "bowling alleys"})
         })
     }
 
@@ -84,7 +95,8 @@ class ActivitiesList extends React.Component {
         .then(resp => resp.json())
         .then((nearbyMovies) => {
             console.log('nearbyMovies', nearbyMovies)
-            this.setState({nearbyMovies})
+            this.setState({activities: nearbyMovies,
+                            type: "movies"})
         })
     }
     
@@ -95,7 +107,8 @@ class ActivitiesList extends React.Component {
         .then(resp => resp.json())
         .then((nearbyParks) => {
             console.log('nearbyParks', nearbyParks)
-            this.setState({nearbyParks})
+            this.setState({activities: nearbyParks,
+                            type: "parks"})
         })
     }
 
@@ -106,7 +119,8 @@ class ActivitiesList extends React.Component {
         .then(resp => resp.json())
         .then((nearbyBars) => {
             console.log('nearbyBars', nearbyBars)
-            this.setState({nearbyBars})
+            this.setState({activities: nearbyBars,
+                            type: "bars"})
         })
     }
     
@@ -118,7 +132,8 @@ class ActivitiesList extends React.Component {
         .then(resp => resp.json())
         .then((nearbyCafes) => {
             console.log('nearbyCafes', nearbyCafes)
-            this.setState({nearbyCafes})
+            this.setState({activities: nearbyCafes,
+                            type: "cafes"})
         })
     }
 
@@ -148,20 +163,18 @@ class ActivitiesList extends React.Component {
                     console.log('in activities', (((this.props.temperature) - 273.15) * 9/5 +32))
                     console.log('in activities', this.props.latitude)
                     console.log('in activities', this.props.longitude)
-                    
+                    console.log('type', this.state.type)
                     
                     const temp = (((this.props.temperature) - 273.15) * 9/5 +32)
                     
                     return(
-                        <div>
+                        <div className="activites">
             <h2>Activities near you</h2>
             <p onClick={() => getRestaurants()}>Restaurants</p>
-            {this.state.nearbyRestaurants.length !== 0 && <RestaurantShow />}
 
             <p onClick={() => getMuseums()}>Museums</p>
-            {this.state.nearbyMuseums.length !== 0 && <RestaurantShow />}
 
-            <p onClick={() => getGyms()}>Gym</p>
+            <p onClick={() => getGyms()}>Gym</p>  
 
             <p onClick={() => getLibraries()}>Libraries</p>
 
@@ -174,6 +187,7 @@ class ActivitiesList extends React.Component {
             <p onClick={() => getBars()}>Bars</p>
 
             <p onClick={() => getCafes()}>Cafes</p>
+            {this.state.activities.length !==0 && <ActivityShow activities={this.state.activities} type={this.state.type}/>}
 
         </div>
     
