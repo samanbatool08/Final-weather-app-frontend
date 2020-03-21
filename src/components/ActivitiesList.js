@@ -25,7 +25,7 @@ class ActivitiesList extends React.Component {
 
     render() {
 
-        const PLACES_KEY = "AIzaSyBeZSj15N3z9iD0tqyGFcxTqiUW8HqfeZk"
+        const PLACES_KEY = ""
     
     const getRestaurants = () => {
         const proxyurl = "https://cors-anywhere.herokuapp.com/";

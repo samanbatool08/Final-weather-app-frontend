@@ -8,7 +8,7 @@ import ActivitiesList from './components/ActivitiesList'
 import LogIn from './components/LogIn'
 
 
-const API_KEY = "c464dbd6a0a531bfe5beedbb84bb9f0e";
+const API_KEY = "";
 
 class App extends React.Component {
 
