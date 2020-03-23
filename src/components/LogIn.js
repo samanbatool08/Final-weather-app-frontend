@@ -1,19 +1,100 @@
 import React from 'react';
 
-const Login = (props) => {
-    console.log(props.user)
+class Login extends React.Component {
+
+    state = {
+        username: "",
+        password: "",
+        signupToggle: false,
+        noUserFoundToggle: false
+    }
+
+    handleChange = (e) => {
+        const attribute = e.target.name
+        const value = e.target.value
+        this.setState(() => {
+            return {[attribute]: value}
+        })
+    }
+
+    handleFormClick = (e) => {
+        e.preventDefault()
+        if(e.target.name === 'login') {
+            fetch('http://localhost:3000/login', {
+                method: "POST",
+                headers: {'content-type': 'application/json',
+                        accepts: 'application/json'},
+                body: JSON.stringify({
+                    user: {username: this.state.username,
+                    password: this.state.password}
+                })
+            })
+            .then((response) => {
+                return response.json()
+            })
+            .then((user) => {
+                if (user.errors) {
+                    alert(user.errors)
+                } else {
+                    this.props.getUser(user)
+                }
+            })
+        } else if (e.target.name === "signup") {
+            fetch('http://localhost:3000/signup',{
+            method: "POST",
+            headers: {'content-type': 'application/json',
+                    accepts: 'application/json'},
+            body: JSON.stringify({
+                user: {username: this.state.username,
+                password: this.state.password}
+            })}
+            )
+            .then(resp => resp.json())
+            .then(newUser => {
+                console.log(newUser)
+                if (newUser.errors) {
+                    alert(newUser.errors)
+                } else {
+                    this.props.getUser(newUser)
+                }
+            })
+        }
+    }
+
+
+    handleClick = () => [
+        this.setState(prevState => {return {signupToggle: !prevState.signupToggle}})
+    ]
+
+    displaySignupForm = 
+    <div className="signup-form">
+        <h2>Sign Up!</h2>
+        <form>
+            <input type="text" name="username"/>
+        </form>
+    </div>
+
+
+    render() {
+    console.log(this.props.user)
         return (
             <div className="login-modal">
+             
             <form>
-                <input type="text" value={props.username} name="username" placeholder="Username" onChange={props.handleChange}/>
-                <input type="text" value={props.password} name="password" placeholder="Password" onChange={props.handleChange}/>
-                <input className="button" onClick={props.getuser} type="submit" name="login" value="Log in"/> 
-                <input className="button" onClick={props.getUser} type="submit" name="signup" value="Sign up"/>
-                {/* <button name="login" onClick={props.getUser}>Log In</button> <button name="signup" onClick={props.getUser}>Sign Up</button> */}
-                
+                <label>Username: </label>
+                <input name="username" value={this.state.username} type="text" onChange={this.handleChange}></input>
+                <label> Password: </label>
+                <input name="password" value={this.state.password} type="password" onChange={this.handleChange}></input> 
+                <input className="button" onClick={this.handleFormClick} type="submit" name="login" value="Log in"/> 
+                <input className="button" onClick={this.handleFormClick} type="submit" name="signup" value="Sign up"/>
             </form>
+            <br />
+            {this.state.noUserFoundToggle && <p className="error">Username and/or password incorrect</p>}
+            <br />
+     
             </div>
         )
     }
+}
 
 export default Login;

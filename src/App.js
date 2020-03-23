@@ -6,9 +6,10 @@ import Form from './components/Form'
 import Weather from './components/Weather'
 import ActivitiesList from './components/ActivitiesList'
 import LogIn from './components/LogIn'
+import Main from './containers/Main'
 
 
-const API_KEY = "";
+const API_KEY = "c464dbd6a0a531bfe5beedbb84bb9f0e";
 
 class App extends React.Component {
 
@@ -66,20 +67,10 @@ class App extends React.Component {
 
     showingActivities: false,
     user: null,
-    username: "",
-    password: "",
-    signupToggle: false, 
-    noUserFoundToggle: false
   }
 
-  getUser = (e) => {
-    e.preventDefault();
-    console.log('hitting getuser')
-    if (e.target.name === 'login') {
-      console.log('hitting login')
-    } else if (e.target.name === "signup") {
-      console.log('hitting sign up')
-    }
+  getUser = (user) => {
+    this.setState(user)
   }
    
     handleChange = (e) => {
@@ -230,10 +221,7 @@ toggleComponents = () => {
   else if (this.state.showingActivities && !this.state.user) {
     console.log('login!!!')
     return <Fragment>
-          <LogIn getUser={this.getUser} 
-          username={this.state.username} 
-          password={this.state.password} 
-          handleChange={this.handleChange}/> 
+          <LogIn getUser={this.getUser} /> 
           <Weather 
       todaysDate={this.state.todaysDate}
       temperature={this.state.temperature}
