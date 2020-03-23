@@ -27,7 +27,7 @@ const Titles = (props) => {
                 {/* <Route path="/activities" component={ActivitiesList}/> */}
                 {/* {props.temperature && <Button variant="btn btn-success" onClick={() => history.push('/activities')}>Activities near you</Button>} */}
                 {props.temperature && <button onClick={props.showActivities}>Activities near you</button>}
-                
+                {/* use link componenet here ^^^ to change url  */}
 
         </div>
     )

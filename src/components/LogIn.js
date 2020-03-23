@@ -37,6 +37,7 @@ class Login extends React.Component {
                     alert(user.errors)
                 } else {
                     this.props.getUser(user)
+                    this.props.history.push("/activities")
                 }
             })
         } else if (e.target.name === "signup") {
@@ -56,6 +57,7 @@ class Login extends React.Component {
                     alert(newUser.errors)
                 } else {
                     this.props.getUser(newUser)
+                    this.props.history.push("/activities")
                 }
             })
         }
