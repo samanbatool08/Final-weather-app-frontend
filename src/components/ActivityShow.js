@@ -1,34 +1,73 @@
 import React from 'react';
+import { Route, Link } from 'react-router-dom';
+
 
 const ActivityShow = (props) => {
-    // console.log('activityshow', props.activities.results[0].opening_hours.open_now)
 
-    // console.log('restaurant data', props.activities.results.slice(0,5))
-    // console.log('photo', props.activities)
-    // console.log('photoref', props.activities.results[0].photos.map(photo => {
-    //     return photo.photo_reference
-    // }))
+    const addActivity = (activity) => {
+        fetch('http://localhost:3000/activities', {
+            method: "POST",
+            headers: {
+                'content-type': 'application/json',
+                accepts: 'application/json'
+            },
+            body: JSON.stringify({
+                location: activity.vicinity,
+                name: activity.name,
+                date: props.date,
+                info: props.type
+            })
+        })
+        .then(resp => resp.json())
+        .then(addedActivity => {
+            fetch('http://localhost:3000/user_activities', {
+                method: "POST",
+                headers: {
+                    'content-type': 'application/json',
+                    accepts: 'application/json'
+                },
+                body: JSON.stringify({
+                    user_id: props.userId,
+                    activity_id: addedActivity.id
+                })
+            })
+            .then(resp => resp.json())
+            .then(ua => {
+                console.log('sucessfuly posted useractivity', ua)
+                props.addUserActivity(ua)
+        })
+        })
+    }
+
+    console.log(props.type)
+    console.log(props.activities.results)
 
 
     return (
-        <div className="activites">
+        <div>
 
-         <h1>Showing {props.type} near you</h1>
+         <h1 className="title-container__subtitle" style={{color: '#f16051', textAlign: 'center', fontSize: '16px'}}>Showing {props.type} near you</h1>
+        <div className="activity___info">
+            <div className="scrollStyle" style={{textAlign: 'center'}}>
         {props.activities.results.length !== 0 ? 
-         props.activities.results.slice(0,5).map(activity => {
-            //  console.log('in map', activity.opening_hours.open_now)
+         props.activities.results.map(activity => {
              return (
                  <div>
-                     <h1>{activity.name}</h1>
-                     <p>Address: {activity.vicinity}</p>
-                     {activity.opening_hours ? activity.opening_hours.open_now && <p>Open: Yes</p> : <p>Open: Information not available</p>}
-                     {/* <p>Get There: {activity.photos ? activity.photos[0].html_attributions[0] : <p>No directions at this time</p>}</p> */}
-                     {activity.photos ? <img src={`https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${activity.photos[0].photo_reference}&key=AIzaSyBeZSj15N3z9iD0tqyGFcxTqiUW8HqfeZk`} /> : <p>no photo available</p>}
-                     
-                     <button>Add to my activities</button>
+                     <div className="activity__show">
+                     <h3 style={{color: '#f16051', textAlign: 'center'}}>{activity.name}</h3>
+                     <p style={{color: '#fff', textAlign: 'center'}}>Address: {activity.vicinity}</p>
+                     {activity.opening_hours ? activity.opening_hours.open_now && <p style={{color: '#fff', textAlign: 'center'}}>Open: Yes</p> : <p style={{color: '#fff', textAlign: 'center'}}>Open: Information not available</p>}
+                     {activity.photos ? <img src={`https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${activity.photos[0].photo_reference}&key=AIzaSyBeZSj15N3z9iD0tqyGFcxTqiUW8HqfeZk`} style={{height: '263px', width: '400px'}}/> : <p style={{color: '#fff', textAlign: 'center'}}>no photo available</p>}
+                     <br />
+                     <button style={{padding: '4px 5px'}} onClick={() => addActivity(activity)}>Add to my activities</button>
+                    </div>
                      </div>
              )
-             }) : <p>Sorry!</p> }
+            }) : <p className="title-container__subtitle" style={{color: '#f16051', textAlign: 'center', fontSize: '16px'}}>Sorry, no {props.type} can be found near you atm. Be sure to check out other activities!</p> }
+            </div>
+            <br />
+            <Link to="/user/activities"><button>See all my saved activities</button></Link>
+        </div>
         </div>
         )
     }

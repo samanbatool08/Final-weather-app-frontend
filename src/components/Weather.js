@@ -1,75 +1,68 @@
 import React from 'react';
 
 const Weather = (props) => {
-    console.log(props.tomorrowMorningDescription)
-        return (
-            <div className="weather__info">
-                {/* {props.todaysDate && <h3>Date: {(props.todaysDate).slice(0, 10)}</h3>}
-                {props.city && props.state && <p>Location: {props.city}, {props.state}</p>}
-                {props.temperature && <p>Temperature: {(((props.temperature) - 273.15) * 9/5 +32).toFixed(2)} degrees Farenheit</p>}
-                {props.humidity && <p>Humidity: {props.humidity}</p>}
-                {props.description && <p>Conditions: {props.description}</p>}
-                {props.error && <p style={{ color: 'red'}}>{props.error}</p>} */}
-                <div className="day__weather">
-                    {props.tomorrowsDate && <h3>Tomorrow's Date: {(props.tomorrowsDate).slice(0, 10)}</h3>}
-                    {props.tomorrowMorningTemperature && <p>Tomorrow Morning Temperature: {(((props.tomorrowMorningTemperature) - 273.15) * 9/5 +32).toFixed(2)} degrees Farenheit</p>}
-                    {props.tomorrowMorningHumidity && <p>Tomorrow Morning Humidity: {props.tomorrowMorningHumidity}</p>}
-                    {props.tomorrowMorningDescription && <p>Tomorrow Morning Conditions: {props.tomorrowMorningDescription}</p>}
-                    <br />
-                    {props.tomorrowEveningTemperature && <p>Tomorrow Evening Temperature: {(((props.tomorrowEveningTemperature) - 273.15) * 9/5 +32).toFixed(2)} degrees Farenheit</p>}
-                    {props.tomorrowEveningHumidity && <p>Tomorrow Evening Humidity: {props.tomorrowEveningHumidity}</p>}
-                    {props.tomorrowEveningDescription && <p>Tomorrow Evening Conditions: {props.tomorrowEveningDescription}</p>}
-                </div>
 
-                <div className="day__weather">
-                    {props.twoDaysFromNowDate && <h3>Date: {(props.twoDaysFromNowDate).slice(0, 10)}</h3>}
-                    {props.twoDayMorningTemperature && <p>Morning Temperature: {(((props.twoDayMorningTemperature) - 273.15) * 9/5 +32).toFixed(2)} degrees Farenheit</p>}
-                    {props.twoDayMorningHumidity && <p>Morning Humidity: {props.twoDayMorningHumidity}</p>}
-                    {props.twoDayMorningDescription && <p>Morning Conditions: {props.twoDayMorningDescription}</p>}
-                    <br />
-                    {props.twoDayEveningTemperature && <p>Evening Temperature: {(((props.twoDayEveningTemperature) - 273.15) * 9/5 +32).toFixed(2)} degrees Farenheit</p>}
-                    {props.twoDayEveningHumidity && <p>Evening Humidity: {props.twoDayEveningHumidity}</p>}
-                    {props.twoDayEveningDescription && <p>Evening Conditions: {props.twoDayEveningDescription}</p>}
-                </div>
-
-                <div className="day__weather">
-                    {props.threeDaysFromNowDate && <h3>Date: {(props.threeDaysFromNowDate).slice(0, 10)}</h3>}
-                    {props.threeDayMorningTemperature && <p>Morning Temperature: {(((props.threeDayMorningTemperature) - 273.15) * 9/5 +32).toFixed(2)} degrees Farenheit</p>}
-                    {props.threeDayMorningHumidity && <p>Morning Humidity: {props.threeDayMorningHumidity}</p>}
-                    {props.threeDayMorningDescription && <p>Morning Conditions: {props.threeDayMorningDescription}</p>}
-                    <br />
-                    {props.threeDayEveningTemperature && <p>Evening Temperature: {(((props.threeDayEveningTemperature) - 273.15) * 9/5 +32).toFixed(2)} degrees Farenheit</p>}
-                    {props.threeDayEveningHumidity && <p>Evening Humidity: {props.threeDayEveningHumidity}</p>}
-                    {props.threeDayEveningDescription && <p>Evening Conditions: {props.threeDayEveningDescription}</p>}
-                </div>
-
-                <div className="day__weather">
-                    {props.fourDaysFromNowDate && <h3>Date: {(props.fourDaysFromNowDate).slice(0, 10)}</h3>}
-                    {props.fourDayMorningTemperature && <p>Morning Temperature: {(((props.fourDayMorningTemperature) - 273.15) * 9/5 +32).toFixed(2)} degrees Farenheit</p>}
-                    {props.fourDayMorningHumidity && <p>Morning Humidity: {props.fourDayMorningHumidity}</p>}
-                    {props.fourDayMorningDescription && <p>Morning Conditions: {props.fourDayMorningDescription}</p>}
-                    <br />
-                    {props.fourDayEveningTemperature && <p>Evening Temperature: {(((props.fourDayEveningTemperature) - 273.15) * 9/5 +32).toFixed(2)} degrees Farenheit</p>}
-                    {props.fourDayEveningHumidity && <p>Evening Humidity: {props.fourDayEveningHumidity}</p>}
-                    {props.fourDayEveningDescription && <p>Evening Conditions: {props.fourDayEveningDescription}</p>}
-                </div>
-
-                <div className="day__weather">
-                    {props.fiveDaysFromNowDate && <h3>Date: {(props.fiveDaysFromNowDate).slice(0, 10)}</h3>}
-                    {props.fiveDayMorningTemperature && <p>Morning Temperature: {(((props.fiveDayMorningTemperature) - 273.15) * 9/5 +32).toFixed(2)} degrees Farenheit</p>}
-                    {props.fiveDayMorningHumidity && <p>Morning Humidity: {props.fiveDayMorningHumidity}</p>}
-                    {props.fiveDayMorningDescription && <p>Morning Conditions: {props.fiveDayMorningDescription}</p>}
-                    <br />
-                    {props.fiveDayEveningTemperature && <p>Evening Temperature: {(((props.fiveDayEveningTemperature) - 273.15) * 9/5 +32).toFixed(2)} degrees Farenheit</p>}
-                    {props.fiveDayEveningHumidity && <p>Evening Humidity: {props.fiveDayEveningHumidity}</p>}
-                    {props.fiveDayEveningDescription && <p>Evening Conditions: {props.fiveDayEveningDescription}</p>}
-                </div>
-
-                
-
+    return (
+        <div className="weather__info">
+            {props.error && <p style={{ color: 'red', fontSize: '16px'}}>{props.error}</p>}
+        
+            <div className="day__weather" >
+                {props.tomorrowsDate && <h3 style={{color: '#f16051', textAlign: 'center'}}>Tomorrow </h3>}<br />
+                {props.tomorrowMorningTemperature && <div style={{fontSize: '16px'}}><span style={{fontWeight: 'bold'}}>Morning: </span> <span>{(((props.tomorrowMorningTemperature) - 273.15) * 9/5 +32).toFixed(2)} ℉</span></div>}<br />
+                {props.tomorrowMorningHumidity && <div><span>Humidity: </span> <span>{props.tomorrowMorningHumidity}</span></div>}
+                {props.tomorrowMorningDescription && <div><span>Conditions: </span><br /> <span>{props.tomorrowMorningDescription}</span></div>}
+                <br />
+                {props.tomorrowEveningTemperature && <div style={{fontSize: '16px'}}><span style={{fontWeight: 'bold'}}>Evening: </span> <span>{(((props.tomorrowEveningTemperature) - 273.15) * 9/5 +32).toFixed(2)} ℉</span></div>}<br />
+                {props.tomorrowEveningHumidity && <div><span>Humidity: </span> <span>{props.tomorrowEveningHumidity}</span></div>}
+                {props.tomorrowEveningDescription && <div><span>Conditions: </span><br /> <span>{props.tomorrowEveningDescription}</span></div>}
             </div>
-        )
-    }
+
+            <div className="day__weather" >
+                {props.twoDaysFromNowDate && <h3 style={{color: '#f16051', textAlign: 'center'}}>Saturday</h3>}<br />
+                {props.twoDayMorningTemperature && <div style={{fontSize: '16px'}}><span style={{fontWeight: 'bold'}}>Morning: </span> <span>{(((props.twoDayMorningTemperature) - 273.15) * 9/5 +32).toFixed(2)} ℉</span></div>}<br />
+                {props.twoDayMorningHumidity && <div><span>Humidity: </span> <span>{props.twoDayMorningHumidity}</span></div>}
+                {props.twoDayMorningDescription && <div><span>Conditions: </span> <span>{props.twoDayMorningDescription}</span></div>}
+                <br />
+                {props.twoDayEveningTemperature && <div style={{fontSize: '16px'}}><span style={{fontWeight: 'bold'}}>Evening: </span> <span>{(((props.twoDayEveningTemperature) - 273.15) * 9/5 +32).toFixed(2)} ℉</span></div>}<br />
+                {props.twoDayEveningHumidity && <div><span>Humidity: </span> <span>{props.twoDayEveningHumidity}</span></div>}
+                {props.twoDayEveningDescription && <div><span>Conditions: </span> <span>{props.twoDayEveningDescription}</span></div>}
+            </div>
+
+            <div className="day__weather" >
+                {props.threeDaysFromNowDate && <h3 style={{color: '#f16051', textAlign: 'center'}}>Sunday</h3>}<br />
+                {props.threeDayMorningTemperature && <div style={{fontSize: '16px'}}><span style={{fontWeight: 'bold'}}>Morning: </span> <span>{(((props.threeDayMorningTemperature) - 273.15) * 9/5 +32).toFixed(2)} ℉</span></div>}<br />
+                {props.threeDayMorningHumidity && <div><span>Humidity: </span> <span>{props.threeDayMorningHumidity}</span></div>}
+                {props.threeDayMorningDescription && <div><span>Conditions: </span> <span>{props.threeDayMorningDescription}</span></div>}
+                <br />
+                {props.threeDayEveningTemperature && <div style={{fontSize: '16px'}}><span style={{fontWeight: 'bold'}}>Evening: </span> <span>{(((props.threeDayEveningTemperature) - 273.15) * 9/5 +32).toFixed(2)} ℉</span></div>}<br />
+                {props.threeDayEveningHumidity && <div><span>Humidity: </span> <span>{props.threeDayEveningHumidity}</span></div>}
+                {props.threeDayEveningDescription && <div><span>Conditions: </span> <span>{props.threeDayEveningDescription}</span></div>}
+            </div>
+            
+            <div className="day__weather" >
+                {props.fourDaysFromNowDate && <h3 style={{color: '#f16051', textAlign: 'center'}}>Monday</h3>}<br />
+                {props.fourDayMorningTemperature && <div style={{fontSize: '16px'}}><span style={{fontWeight: 'bold'}}>Morning: </span> <span>{(((props.fourDayMorningTemperature) - 273.15) * 9/5 +32).toFixed(2)} ℉</span></div>}<br />
+                {props.fourDayMorningHumidity && <div><span>Humidity: </span> <span>{props.fourDayMorningHumidity}</span></div>}
+                {props.fourDayMorningDescription && <div><span>Conditions: </span> <span>{props.fourDayMorningDescription}</span></div>}
+                <br />
+                {props.fourDayEveningTemperature && <div style={{fontSize: '16px'}}><span style={{fontWeight: 'bold'}}>Evening: </span> <span>{(((props.fourDayEveningTemperature) - 273.15) * 9/5 +32).toFixed(2)} ℉</span></div>}<br />
+                {props.fourDayEveningHumidity && <div><span>Humidity: </span> <span>{props.fourDayEveningHumidity}</span></div>}
+                {props.fourDayEveningDescription && <div><span>Conditions: </span> <span>{props.fourDayEveningDescription}</span></div>}
+            </div>
+
+            <div className="day__weather" >
+                {props.fiveDaysFromNowDate && <h3 style={{color: '#f16051', textAlign: 'center'}}>Tuesday</h3>}<br />
+                {props.fiveDayMorningTemperature && <div style={{fontSize: '16px'}}><span style={{fontWeight: 'bold'}}>Morning: </span> <span>{(((props.fiveDayMorningTemperature) - 273.15) * 9/5 +32).toFixed(2)} ℉</span></div>}<br />
+                {props.fiveDayMorningHumidity && <div><span>Humidity: </span> <span>{props.fiveDayMorningHumidity}</span></div>}
+                {props.fiveDayMorningDescription && <div><span>Conditions: </span> <span>{props.fiveDayMorningDescription}</span></div>}
+                <br />
+                {props.fiveDayEveningTemperature && <div style={{fontSize: '16px'}}><span style={{fontWeight: 'bold'}}>Evening: </span> <span>{(((props.fiveDayEveningTemperature) - 273.15) * 9/5 +32).toFixed(2)} ℉</span></div>}<br />
+                {props.fiveDayEveningHumidity && <div><span>Humidity: </span> <span>{props.fiveDayEveningHumidity}</span></div>}
+                {props.fiveDayEveningDescription && <div><span>Conditions: </span> <span>{props.fiveDayEveningDescription}</span></div>}
+            </div>
+        </div>
+    )
+}
 
 
 export default Weather;

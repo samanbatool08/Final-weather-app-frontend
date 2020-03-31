@@ -1,18 +1,12 @@
 import React from 'react';
-import { Fragment } from 'react'
-import { BrowserRouter as Router, Switch, Route, NavLink} from 'react-router-dom';
-
-
+import { Route, Switch } from 'react-router-dom';
 import Titles from '../components/Titles';
 import Form from '../components/Form'
 import Weather from '../components/Weather'
 import ActivitiesList from '../components/ActivitiesList'
 import LogIn from '../components/LogIn'
-import NavBar from '../containers/NavBar'
+import UserActivities from '../components/UserActivities'
 
-
-
-const API_KEY = "c464dbd6a0a531bfe5beedbb84bb9f0e";
 
 class Main extends React.Component {
 
@@ -67,38 +61,40 @@ class Main extends React.Component {
     fiveDayEveningDescription: undefined,
 
     error: "",
-
-    showingActivities: false,
     user: null,
+    userId: null,
+    userActivities: []
+  }
+
+  setUserId = (id) => {
+    this.setState({userId: id})
   }
 
   getUser = (user) => {
     this.setState(user)
   }
    
-    handleChange = (e) => {
-      this.setState({
-        [e.target.name]: e.target.value
-      })
-    }
- 
+  handleChange = (e) => {
+    this.setState({
+      [e.target.name]: e.target.value
+    })
+  }
 
-  showActivities = () => {
-   
-    // this.setState({
-    //     showingActivities: !this.state.showingActivities
-    // })
-}
+  fillingUpUserActivities = (activities) => {
+    this.setState({userActivities: activities})
+  }
+ 
+  addUserActivity = (activity) => {
+    this.setState({userActivities: [...this.state.userActivities, activity]})
+  }
 
   getWeather = async (e) => {
     e.preventDefault();
     const city = e.target.elements.city.value
     const state = e.target.elements.state.value
-    const api_call = await fetch(`http://api.openweathermap.org/data/2.5/forecast?q=${city},${state}&appid=${API_KEY}&mode=json`)
+    const api_call = await fetch(`http://api.openweathermap.org/data/2.5/forecast?q=${city},${state}&appid=${process.env.REACT_APP_API_KEY}&mode=json`)
     const data = await api_call.json()
     if (city && state) {
-    console.log(data, "here is the object")
-    console.log(data.city.coord.lon, data.city.coord.lat)
     this.setState({
       todaysDate: data.list[0].dt_txt,
       temperature: data.list[0].main.temp,
@@ -149,12 +145,8 @@ class Main extends React.Component {
       fiveDayEveningHumidity: data.list[39].main.humidity, 
       fiveDayEveningDescription: data.list[39].weather[0].description,
 
-      
-
-    error: ""
-    })
-
-  } else {
+      error: "" })
+    } else {
     this.setState({
       todaysDate: "",
       temperature: undefined,
@@ -205,214 +197,132 @@ class Main extends React.Component {
       fiveDayEveningHumidity: undefined, 
       fiveDayEveningDescription: undefined,
 
-
       error: "Please enter a value."
     })
   }
 }
 
-
-toggleComponents = () => {
-  if(this.state.showingActivities && this.state.user) { 
-    return (
-    <Switch>
-        <Route 
-        exact path='/activities'
-        render={props => <ActivitiesList
-                            {...props} 
-                            temperature={this.state.temperature}
-                            latitude={this.state.latitude}
-                            longitude={this.state.longitude}
-                            city={this.state.city}
-                            state={this.state.state}
-                            todaysDate={this.state.todaysDate}
-                        /> } 
-        /> 
-    </Switch>)
-  } 
-  else if (this.state.showingActivities && !this.state.user) {
-    console.log('login!!!')
-    return (
-    <Fragment>
-         {/* <NavBar user={this.state.user} /> */}
-             <LogIn getUser={this.getUser} />
-        <Switch>
-            
-            <Route
-            exact path='/weather'
-            render={props => <Weather {...props}
-                                todaysDate={this.state.todaysDate}
-                                temperature={this.state.temperature}
-                                city={this.state.city}
-                                state={this.state.state}
-                                humidity={this.state.humidity}
-                                description={this.state.description}
-
-                                tomorrowsDate={this.state.tomorrowsDate}
-                                tomorrowMorningTemperature={this.state.tomorrowMorningTemperature}
-                                tomorrowMorningHumidity={this.state.tomorrowMorningHumidity}
-                                tomorrowMorningDescription={this.state.tomorrowMorningDescription}
-                                tomorrowEveningTemperature={this.state.tomorrowEveningTemperature}
-                                tomorrowEveningHumidity={this.state.tomorrowEveningHumidity}
-                                tomorrowEveningDescription={this.state.tomorrowEveningDescription}
-
-                                twoDaysFromNowDate={this.state.twoDaysFromNowDate}
-                                twoDayMorningTemperature={this.state.twoDayMorningTemperature}
-                                twoDayMorningHumidity={this.state.twoDayMorningHumidity} 
-                                twoDayMorningDescription={this.state.twoDayMorningDescription}
-                                twoDayEveningTemperature={this.state.twoDayEveningTemperature}
-                                twoDayEveningHumidity={this.state.twoDayEveningHumidity} 
-                                twoDayEveningDescription={this.state.twoDayEveningDescription}
-
-                                threeDaysFromNowDate={this.state.threeDaysFromNowDate}
-                                threeDayMorningTemperature={this.state.threeDayMorningTemperature}
-                                threeDayMorningHumidity={this.state.threeDayMorningHumidity} 
-                                threeDayMorningDescription={this.state.threeDayMorningDescription}
-                                threeDayEveningTemperature={this.state.threeDayEveningTemperature}
-                                threeDayEveningHumidity={this.state.threeDayEveningHumidity} 
-                                threeDayEveningDescription={this.state.threeDayEveningDescription}
-
-                                fourDaysFromNowDate={this.state.fourDaysFromNowDate}
-                                fourDayMorningTemperature={this.state.fourDayMorningTemperature}
-                                fourDayMorningHumidity={this.state.fourDayMorningHumidity} 
-                                fourDayMorningDescription={this.state.fourDayMorningDescription}
-                                fourDayEveningTemperature={this.state.fourDayEveningTemperature}
-                                fourDayEveningHumidity={this.state.fourDayEveningHumidity} 
-                                fourDayEveningDescription={this.state.fourDayEveningDescription}
-
-                                fiveDaysFromNowDate={this.state.fiveDaysFromNowDate}
-                                fiveDayMorningTemperature={this.state.fiveDayMorningTemperature}
-                                fiveDayMorningHumidity={this.state.fiveDayMorningHumidity} 
-                                fiveDayMorningDescription={this.state.fiveDayMorningDescription}
-                                fiveDayEveningTemperature={this.state.fiveDayEveningTemperature}
-                                fiveDayEveningHumidity={this.state.fiveDayEveningHumidity} 
-                                fiveDayEveningDescription={this.state.fiveDayEveningDescription}
-
-                                error={this.state.error} /> }
-                                />
-        </Switch>
-    </Fragment> )
-  } 
-  else {
-      return (
-      <Fragment>
-        <Switch>
-            <Route 
-            exact path='/weather'
-            render={props => <Weather {...props}
-                                todaysDate={this.state.todaysDate}
-                                temperature={this.state.temperature}
-                                city={this.state.city}
-                                state={this.state.state}
-                                humidity={this.state.humidity}
-                                description={this.state.description}
-
-                                tomorrowsDate={this.state.tomorrowsDate}
-                                tomorrowMorningTemperature={this.state.tomorrowMorningTemperature}
-                                tomorrowMorningHumidity={this.state.tomorrowMorningHumidity}
-                                tomorrowMorningDescription={this.state.tomorrowMorningDescription}
-                                tomorrowEveningTemperature={this.state.tomorrowEveningTemperature}
-                                tomorrowEveningHumidity={this.state.tomorrowEveningHumidity}
-                                tomorrowEveningDescription={this.state.tomorrowEveningDescription}
-
-                                twoDaysFromNowDate={this.state.twoDaysFromNowDate}
-                                twoDayMorningTemperature={this.state.twoDayMorningTemperature}
-                                twoDayMorningHumidity={this.state.twoDayMorningHumidity} 
-                                twoDayMorningDescription={this.state.twoDayMorningDescription}
-                                twoDayEveningTemperature={this.state.twoDayEveningTemperature}
-                                twoDayEveningHumidity={this.state.twoDayEveningHumidity} 
-                                twoDayEveningDescription={this.state.twoDayEveningDescription}
-
-                                threeDaysFromNowDate={this.state.threeDaysFromNowDate}
-                                threeDayMorningTemperature={this.state.threeDayMorningTemperature}
-                                threeDayMorningHumidity={this.state.threeDayMorningHumidity} 
-                                threeDayMorningDescription={this.state.threeDayMorningDescription}
-                                threeDayEveningTemperature={this.state.threeDayEveningTemperature}
-                                threeDayEveningHumidity={this.state.threeDayEveningHumidity} 
-                                threeDayEveningDescription={this.state.threeDayEveningDescription}
-
-                                fourDaysFromNowDate={this.state.fourDaysFromNowDate}
-                                fourDayMorningTemperature={this.state.fourDayMorningTemperature}
-                                fourDayMorningHumidity={this.state.fourDayMorningHumidity} 
-                                fourDayMorningDescription={this.state.fourDayMorningDescription}
-                                fourDayEveningTemperature={this.state.fourDayEveningTemperature}
-                                fourDayEveningHumidity={this.state.fourDayEveningHumidity} 
-                                fourDayEveningDescription={this.state.fourDayEveningDescription}
-
-                                fiveDaysFromNowDate={this.state.fiveDaysFromNowDate}
-                                fiveDayMorningTemperature={this.state.fiveDayMorningTemperature}
-                                fiveDayMorningHumidity={this.state.fiveDayMorningHumidity} 
-                                fiveDayMorningDescription={this.state.fiveDayMorningDescription}
-                                fiveDayEveningTemperature={this.state.fiveDayEveningTemperature}
-                                fiveDayEveningHumidity={this.state.fiveDayEveningHumidity} 
-                                fiveDayEveningDescription={this.state.fiveDayEveningDescription}
-
-                                error={this.state.error}/> } 
-                                />
-        </Switch>
-      </Fragment>)
-    } 
-}
-
 render() {
+  return (
+    <div>
+      <div className="wrapper">
+        <div className="main">
+            <div className="row">
 
-  console.log(((this.state.temperature) - 273) * 9/5 + 32)
-  console.log('showing', this.state.showingActivities)
-  console.log("LAT", this.state.latitude)
-  console.log("LONG", this.state.longitude)
-
-    return(
-      <div>
-        <div className="wrapper">
-          <div className="main">
-              {/* <div className="row"> */}
-  
-                {(((this.state.temperature) - 273) * 9/5 + 32) >= 70 ? 
-                <div 
-              className="col-xs-5 title-container sunny-image"  >
-                  <Titles 
-                  todaysDate={this.state.todaysDate}
-                  temperature={this.state.temperature}
-                  city={this.state.city}
-                  state={this.state.state}
-                  humidity={this.state.humidity}
-                  description={this.state.description}
-                  showingActivities={this.state.showingActivities}
-                  showActivities={this.showActivities}
-                  />
-                </div> 
-                : 
-                <div className="col-xs-5 title-container default-image">
-                  <Titles 
-                  todaysDate={this.state.todaysDate}
-                  temperature={this.state.temperature}
-                  city={this.state.city}
-                  state={this.state.state}
-                  humidity={this.state.humidity}
-                  description={this.state.description}
-                  showingActivities={this.state.showingActivities}
-                  showActivities={this.showActivities}
-                  />
+              {(((this.state.temperature) - 273) * 9/5 + 32) >= 70 ? 
+              <div className="col-xs-5 title-container sunny-image"  >
+                <Titles 
+                todaysDate={this.state.todaysDate}
+                temperature={this.state.temperature}
+                city={this.state.city}
+                state={this.state.state}
+                humidity={this.state.humidity}
+                description={this.state.description}
+                showingActivities={this.state.showingActivities}
+                user={this.state.user}                  />
+              </div> 
+              : 
+              <div className="col-xs-5 title-container default-image">
+                <Titles 
+                todaysDate={this.state.todaysDate}
+                temperature={this.state.temperature}
+                city={this.state.city}
+                state={this.state.state}
+                humidity={this.state.humidity}
+                description={this.state.description}
+                showingActivities={this.state.showingActivities}
+                />
               </div>}
-                
+              
+              <div className="col-xs-7 form-container">
+                <Form 
+                getWeather={this.getWeather}
+                getWeeklyWeather={this.getWeeklyWeather}/>
 
-                <div className="col-xs-7 form-container">
-                  <Form 
-                  getWeather={this.getWeather}
-                  getWeeklyWeather={this.getWeeklyWeather}/>
+              <Switch>
+                <Route path="/weather">
+                  <Weather 
+                  todaysDate={this.state.todaysDate}
+                  temperature={this.state.temperature}
+                  city={this.state.city}
+                  state={this.state.state}
+                  humidity={this.state.humidity}
+                  description={this.state.description}
+            
+                  tomorrowsDate={this.state.tomorrowsDate}
+                  tomorrowMorningTemperature={this.state.tomorrowMorningTemperature}
+                  tomorrowMorningHumidity={this.state.tomorrowMorningHumidity}
+                  tomorrowMorningDescription={this.state.tomorrowMorningDescription}
+                  tomorrowEveningTemperature={this.state.tomorrowEveningTemperature}
+                  tomorrowEveningHumidity={this.state.tomorrowEveningHumidity}
+                  tomorrowEveningDescription={this.state.tomorrowEveningDescription}
+            
+                  twoDaysFromNowDate={this.state.twoDaysFromNowDate}
+                  twoDayMorningTemperature={this.state.twoDayMorningTemperature}
+                  twoDayMorningHumidity={this.state.twoDayMorningHumidity} 
+                  twoDayMorningDescription={this.state.twoDayMorningDescription}
+                  twoDayEveningTemperature={this.state.twoDayEveningTemperature}
+                  twoDayEveningHumidity={this.state.twoDayEveningHumidity} 
+                  twoDayEveningDescription={this.state.twoDayEveningDescription}
+            
+                  threeDaysFromNowDate={this.state.threeDaysFromNowDate}
+                  threeDayMorningTemperature={this.state.threeDayMorningTemperature}
+                  threeDayMorningHumidity={this.state.threeDayMorningHumidity} 
+                  threeDayMorningDescription={this.state.threeDayMorningDescription}
+                  threeDayEveningTemperature={this.state.threeDayEveningTemperature}
+                  threeDayEveningHumidity={this.state.threeDayEveningHumidity} 
+                  threeDayEveningDescription={this.state.threeDayEveningDescription}
+            
+                  fourDaysFromNowDate={this.state.fourDaysFromNowDate}
+                  fourDayMorningTemperature={this.state.fourDayMorningTemperature}
+                  fourDayMorningHumidity={this.state.fourDayMorningHumidity} 
+                  fourDayMorningDescription={this.state.fourDayMorningDescription}
+                  fourDayEveningTemperature={this.state.fourDayEveningTemperature}
+                  fourDayEveningHumidity={this.state.fourDayEveningHumidity} 
+                  fourDayEveningDescription={this.state.fourDayEveningDescription}
+            
+                  fiveDaysFromNowDate={this.state.fiveDaysFromNowDate}
+                  fiveDayMorningTemperature={this.state.fiveDayMorningTemperature}
+                  fiveDayMorningHumidity={this.state.fiveDayMorningHumidity} 
+                  fiveDayMorningDescription={this.state.fiveDayMorningDescription}
+                  fiveDayEveningTemperature={this.state.fiveDayEveningTemperature}
+                  fiveDayEveningHumidity={this.state.fiveDayEveningHumidity} 
+                  fiveDayEveningDescription={this.state.fiveDayEveningDescription}
+            
+                  error={this.state.error} />
+                </Route>
+                <Route 
+                  path='/activities' 
+                  render={props => <ActivitiesList {...props} 
+                  temperature={this.state.temperature}
+                  latitude={this.state.latitude}
+                  longitude={this.state.longitude}
+                  city={this.state.city}
+                  state={this.state.state}
+                  todaysDate={this.state.todaysDate}
+                  userId={this.state.userId}
+                  addUserActivity={this.addUserActivity}
+                  userActivities={this.state.userActivities}/>} />
 
-                {this.toggleComponents()}
-        
-                </div>
-              {/* </div> */}
-             {/* </div> */}
+                <Route 
+                  path='/login' 
+                  render={props => <LogIn {...props} 
+                  getUser={this.getUser} 
+                  setUserId={this.setUserId} 
+                  userId={this.state.userId} 
+                  fillingUpUserActivities={this.fillingUpUserActivities} 
+                  userActivities={this.state.userActivities}/>} />
+                <Route path="/user/activities">
+                  <UserActivities userActivities={this.state.userActivities}/>
+                </Route>
+              </Switch>
+            </div>
           </div>
         </div>
       </div>
+    </div>
     )
   }
-
 }
-
 
 export default Main;
