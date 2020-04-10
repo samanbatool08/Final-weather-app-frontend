@@ -69,11 +69,11 @@ class Main extends React.Component {
   setUserId = (id) => {
     this.setState({userId: id})
   }
-
+   
   getUser = (user) => {
     this.setState(user)
   }
-   
+  
   handleChange = (e) => {
     this.setState({
       [e.target.name]: e.target.value
@@ -87,6 +87,18 @@ class Main extends React.Component {
   addUserActivity = (activity) => {
     this.setState({userActivities: [...this.state.userActivities, activity]})
   }
+
+
+  deleteActivity = (id) => {
+    fetch(`http://localhost:3000/activities/${parseInt(id)}`, {
+    method: 'DELETE' })
+    fetch(`http://localhost:3000/user_activities/${parseInt(id)-4}`, {
+      method: 'DELETE' })
+    let activitiesToKeep = this.state.userActivities.filter(activity => activity.id !== id)
+    console.log(activitiesToKeep)
+    this.setState({userActivities: activitiesToKeep})
+}
+
 
   getWeather = async (e) => {
     e.preventDefault();
@@ -313,7 +325,8 @@ render() {
                   fillingUpUserActivities={this.fillingUpUserActivities} 
                   userActivities={this.state.userActivities}/>} />
                 <Route path="/user/activities">
-                  <UserActivities userActivities={this.state.userActivities}/>
+                  <UserActivities userActivities={this.state.userActivities}
+                                  deleteActivity={this.deleteActivity} />
                 </Route>
               </Switch>
             </div>
