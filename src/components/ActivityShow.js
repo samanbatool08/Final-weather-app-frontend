@@ -39,6 +39,8 @@ const ActivityShow = (props) => {
         })
     }
 
+    
+
     console.log(props.type)
     console.log(props.activities.results)
 

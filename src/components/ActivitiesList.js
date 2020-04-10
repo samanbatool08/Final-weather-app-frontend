@@ -1,7 +1,6 @@
 import React from 'react'; 
 import ActivityShow from './ActivityShow';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
-import PlacesAutoComplete, { geocodeByAddress, getLatLng } from 'react-places-autocomplete'; 
+ 
 
 class ActivitiesList extends React.Component {
 
@@ -10,7 +9,6 @@ class ActivitiesList extends React.Component {
         type: null, 
         showOtherActivities: false
     }
-    
     
     render() {
         console.log(this.state.key)    
