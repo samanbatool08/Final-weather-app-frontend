@@ -1,4 +1,6 @@
 import React from 'react';
+import { Route, Link } from 'react-router-dom';
+
 
 const UserActivities = (props) => {
     
@@ -7,19 +9,23 @@ const UserActivities = (props) => {
                 <h1 className="title-container__subtitle" style={{color: '#f16051', textAlign: 'center', fontSize: '16px'}}>Your upcoming activities!</h1>
                 <div className="scrollStyle__user">
             {props.userActivities.map(activity => {
-                console.log('here', activity)
                 return (
-                    <div className="activities" style={{border: '5px solid rgba(241, 96, 81, .5)'}}>
+                    
+                    <div className="userActivities">
                         <h1 style={{color: '#fff', fontSize: '16px'}}>{activity.name}</h1>
                         <p style={{color: '#fff', fontSize: '16px'}}>{activity.type}</p>
                         <p style={{color: '#fff', fontSize: '16px'}}>{activity.location}</p>
                         <p style={{color: '#fff', fontSize: '16px', fontWeight: 'bold'}}>Added: {activity.date}</p>
+                        <div className="rightAlign">
                         <button onClick={() => props.deleteActivity(activity.id)}>Visited</button>
                         </div>
+                        </div>
+                    
                         
                 )
             })}
             </div>
+            <Link to="/activities"><button id="positionBottom">Back to All Activities</button></Link>
             </div>
         )
     }

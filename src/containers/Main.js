@@ -63,7 +63,7 @@ class Main extends React.Component {
     error: "",
     user: null,
     userId: null,
-    userActivities: []
+    userActivities: [],
   }
 
   setUserId = (id) => {
@@ -221,8 +221,9 @@ render() {
         <div className="main">
             <div className="row">
 
-              {(((this.state.temperature) - 273) * 9/5 + 32) >= 70 ? 
-              <div className="col-xs-5 title-container sunny-image"  >
+              
+              <div className={(((this.state.temperature) - 273) * 9/5 + 32) >= 70 ? 
+                "col-xs-5 title-container sunny-image" : "col-xs-5 title-container default-image"}>
                 <Titles 
                 todaysDate={this.state.todaysDate}
                 temperature={this.state.temperature}
@@ -231,20 +232,8 @@ render() {
                 humidity={this.state.humidity}
                 description={this.state.description}
                 showingActivities={this.state.showingActivities}
-                user={this.state.user}                  />
+                userId={this.state.userId} />
               </div> 
-              : 
-              <div className="col-xs-5 title-container default-image">
-                <Titles 
-                todaysDate={this.state.todaysDate}
-                temperature={this.state.temperature}
-                city={this.state.city}
-                state={this.state.state}
-                humidity={this.state.humidity}
-                description={this.state.description}
-                showingActivities={this.state.showingActivities}
-                />
-              </div>}
               
               <div className="col-xs-7 form-container">
                 <Form 
@@ -314,7 +303,7 @@ render() {
                   todaysDate={this.state.todaysDate}
                   userId={this.state.userId}
                   addUserActivity={this.addUserActivity}
-                  userActivities={this.state.userActivities}/>} />
+                  userActivities={this.state.userActivities} />} />
 
                 <Route 
                   path='/login' 
