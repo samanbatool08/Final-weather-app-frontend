@@ -64,6 +64,7 @@ class Main extends React.Component {
     user: null,
     userId: null,
     userActivities: [],
+    activitySaved: null
   }
 
   setUserId = (id) => {
@@ -71,7 +72,7 @@ class Main extends React.Component {
   }
    
   getUser = (user) => {
-    this.setState(user)
+    this.setState({user})
   }
   
   handleChange = (e) => {
@@ -84,8 +85,9 @@ class Main extends React.Component {
     this.setState({userActivities: activities})
   }
  
-  addUserActivity = (activity) => {
-    this.setState({userActivities: [...this.state.userActivities, activity]})
+  addUserActivity = (activity, index) => {
+    this.setState({userActivities: [...this.state.userActivities, activity],
+                    activitySaved: index})
   }
 
 
@@ -303,7 +305,8 @@ render() {
                   todaysDate={this.state.todaysDate}
                   userId={this.state.userId}
                   addUserActivity={this.addUserActivity}
-                  userActivities={this.state.userActivities} />} />
+                  userActivities={this.state.userActivities} 
+                  activitySaved={this.state.activitySaved} />} />
 
                 <Route 
                   path='/login' 

@@ -23,7 +23,7 @@ const Titles = (props) => {
                 <br />
                 <div>{props.userId && <Link to="/weather"><button>Back to Weekly Weather</button></Link>}</div>
                 <br />
-                <div>{props.userId && <Link to="/weather"><button>Log Out</button></Link>}</div>
+                <div>{props.userId && <Link to="/"><button>Log Out</button></Link>}</div>
                 </div>
 
   

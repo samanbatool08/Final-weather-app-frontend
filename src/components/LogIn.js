@@ -9,6 +9,10 @@ class Login extends React.Component {
         noUserFoundToggle: false
     }
 
+    componentDidMount() {
+        this.props.getUser("") // logs out user
+    }
+
     handleChange = (e) => {
         const attribute = e.target.name
         const value = e.target.value
