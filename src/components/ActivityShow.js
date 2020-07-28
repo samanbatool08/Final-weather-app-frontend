@@ -3,7 +3,6 @@ import { Route, Link } from 'react-router-dom';
 import ActivityItem from './ActivityItem';
 
 
-
 const ActivityShow = (props) => {
 
     const addActivity = (activity) => {
@@ -47,11 +46,10 @@ const ActivityShow = (props) => {
 
          <h1 className="title-container__subtitle" style={{color: '#f16051', textAlign: 'center', fontSize: '16px'}}>Showing {props.type} near you</h1>
         <div className="activity___info">
-            <div className={props.activitiesButton ? "scrollStyle" : "scrollStyleSmall"} style={{textAlign: 'center'}}>
+            <div className={props.showOtherActivities ? "scrollStyleSmall" : "scrollStyle"} style={{textAlign: 'center'}}>
         {props.activities.results.length !== 0 ? 
          props.activities.results.map((activity) => {
              return (
-                 
                  <div className="activity__show">
                  <ActivityItem activity={activity} addActivity={addActivity}/>
                 </div>      

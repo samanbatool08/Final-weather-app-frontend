@@ -5,11 +5,26 @@ import './App.css';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import {BrowserRouter as Router} from 'react-router-dom'
+import { BrowserRouter as Router } from 'react-router-dom'
+import { createStore, bindActionCreators } from 'redux';
 
- 
-ReactDOM.render(<Router><App /></Router>, 
-                document.getElementById('root'));
+let initialState = {
+    likes: 0
+}
+let reducer = (prevState = initialState, action) => {
+    switch (action.type) {
+        default:
+            return prevState
+    }
+};
+
+let store = createStore(reducer);
+
+console.log(store.getState())
+
+
+ReactDOM.render(<Router><App /></Router>,
+    document.getElementById('root'));
 
 
 

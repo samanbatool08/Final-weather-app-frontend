@@ -168,7 +168,7 @@ button:active {
 
 .scrollStyleSmall
 {
-    max-height: 230px;
+    max-height: 275px;
     overflow-y: scroll;
 }
 

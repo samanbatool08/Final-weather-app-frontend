@@ -8,23 +8,9 @@ const App = () => {
   return (
     <div>
     <div className="application">
-      <div>
-        <nav>
-          
-            
-              <Link to="/weather"><button>Weather</button></Link>
-           
-              <Link to="/activities"><button>All Activities</button></Link>
-           
-              <Link to="/user/Activities"><button>My Activities</button></Link>
-
-              <Link to="/"><button>Log Out</button></Link>
-          <br />
-        </nav>
-        </div>
+      <Main />
       </div>
 
-      <Main />
       </div>
  
   )

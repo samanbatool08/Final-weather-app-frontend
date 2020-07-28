@@ -72,7 +72,8 @@ class ActivitiesList extends React.Component {
                                                                 addUserActivity={this.props.addUserActivity}
                                                                 userActivities={this.props.userActivities}
                                                                 activitiesButton={this.state.activitiesButton}
-                                                                activitySaved={this.props.activitySaved}/>}
+                                                                activitySaved={this.props.activitySaved}
+                                                                showOtherActivities={this.state.showOtherActivities}/>}
             </div>
             :
             <div>
@@ -106,7 +107,8 @@ class ActivitiesList extends React.Component {
                                                                 userId={this.props.userId} date={this.props.todaysDate}
                                                                 addUserActivity={this.props.addUserActivity}
                                                                 userActivities={this.props.userActivities}
-                                                                activitySaved={this.props.activitySaved}/>}
+                                                                activitySaved={this.props.activitySaved}
+                                                                showOtherActivities={this.state.showOtherActivities}/>}
             </div>}
 
         </div>
