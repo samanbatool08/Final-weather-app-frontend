@@ -23,7 +23,7 @@ class Login extends React.Component {
     handleFormClick = (e) => {
         e.preventDefault()
         if(e.target.name === 'login') {
-            fetch('http://localhost:3000/login', {
+            fetch('https://weatheryoushouldgo-app-api.herokuapp.com/login', {
                 method: "POST",
                 headers: {'content-type': 'application/json',
                         accepts: 'application/json'},
@@ -42,7 +42,7 @@ class Login extends React.Component {
                     this.props.fillingUpUserActivities(user.activities)
                     this.props.history.push("/activities")
                 }})} else if (e.target.name === "signup") {
-            fetch('http://localhost:3000/signup',{
+            fetch('https://weatheryoushouldgo-app-api.herokuapp.com/signup',{
             method: "POST",
             headers: {'content-type': 'application/json',
                     accepts: 'application/json'},
