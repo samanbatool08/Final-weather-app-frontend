@@ -30,12 +30,12 @@ const App = () => {
         </div> */}
 
     <Layout>
-        <Drawer title={<Link style={{textDecoration: 'none', color: 'black'}} to="/">MyPortfolio</Link>}>
+        <Drawer title={<Link style={{textDecoration: 'none', color: 'black'}} to="/">WeatherApp</Link>}>
             <Navigation>
-              <Link to="/weather">Resume</Link>
-              <Link to="/activities">About Me</Link>
-              <Link to="/user/Activities">Projects</Link>
-              <Link to="/logout">Contact</Link>
+              <Link to="/weather">Weather</Link>
+              <Link to="/activities">Activities</Link>
+              <Link to="/user/Activities">Your Activities</Link>
+              <Link to="/logout">Logout</Link>
             </Navigation>
         </Drawer>
     </Layout>
