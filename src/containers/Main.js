@@ -107,7 +107,6 @@ class Main extends React.Component {
     const city = e.target.elements.city.value
     const state = e.target.elements.state.value
     const proxyurl = "https://cors-anywhere.herokuapp.com/";
-    // const url = `http://api.openweathermap.org/data/2.5/forecast?q=${city},${state}&appid=c464dbd6a0a531bfe5beedbb84bb9f0e&mode=json`
     const url = `http://api.openweathermap.org/data/2.5/forecast?q=${city},${state}&appid=${process.env.REACT_APP_API_KEY}&mode=json`
     console.log(url)
     const api_call = await fetch(proxyurl + url)
