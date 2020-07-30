@@ -2,15 +2,17 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto+Slab:400,700');
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400');
 /* will import from node_modules/react-widgets */
-@import "react-widgets/dist/css/react-widgets.css"
+@import "react-widgets/dist/css/react-widgets.css";
 
 #my{
   zoom: 80%;
   }
 
+  
 body {
   font-family: "Open Sans", serif;
 }
+
 
 .wrapper {
   background: linear-gradient(to right, #e67e22, #e74c3c);
