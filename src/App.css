@@ -4,6 +4,10 @@
 /* will import from node_modules/react-widgets */
 @import "react-widgets/dist/css/react-widgets.css"
 
+#my{
+  zoom: 80%;
+  }
+
 body {
   font-family: "Open Sans", serif;
 }
