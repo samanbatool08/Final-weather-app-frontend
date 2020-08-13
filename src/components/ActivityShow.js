@@ -7,7 +7,9 @@ import ActivityItem from './ActivityItem';
 const ActivityShow = (props) => {
 
     const addActivity = (activity) => {
-        fetch('https://weatheryoushouldgo-app-api.herokuapp.com/activities', {
+        // fetch('https://weatheryoushouldgo-app-api.herokuapp.com/activities', {
+            fetch('http://localhost:3000//activities', {
+
             method: "POST",
             headers: {
                 'content-type': 'application/json',
@@ -22,7 +24,9 @@ const ActivityShow = (props) => {
         })
         .then(resp => resp.json())
         .then(addedActivity => {
-            fetch('https://weatheryoushouldgo-app-api.herokuapp.com/user_activities', {
+            // fetch('https://weatheryoushouldgo-app-api.herokuapp.com/user_activities', {
+                fetch('http://localhost:3000/user_activities', {
+
                 method: "POST",
                 headers: {
                     'content-type': 'application/json',

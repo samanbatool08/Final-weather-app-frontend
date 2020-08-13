@@ -23,7 +23,10 @@ class Login extends React.Component {
     handleFormClick = (e) => {
         e.preventDefault()
         if(e.target.name === 'login') {
-            fetch('https://weatheryoushouldgo-app-api.herokuapp.com/login', {
+            console.log('hitting')
+            // fetch('https://weatheryoushouldgo-app-api.herokuapp.com/login', {
+                fetch('http://localhost:3000/login', {
+
                 method: "POST",
                 headers: {'content-type': 'application/json',
                         accepts: 'application/json'},
@@ -32,6 +35,7 @@ class Login extends React.Component {
                     password: this.state.password}
                 })})
             .then((response) => {
+                console.log(response, 'login')
                 return response.json()})
             .then((user) => {
                 if (user.errors) {
@@ -42,7 +46,9 @@ class Login extends React.Component {
                     this.props.fillingUpUserActivities(user.activities)
                     this.props.history.push("/activities")
                 }})} else if (e.target.name === "signup") {
-            fetch('https://weatheryoushouldgo-app-api.herokuapp.com/signup',{
+            // fetch('https://weatheryoushouldgo-app-api.herokuapp.com/signup',{
+                fetch('http://localhost:3000/signup',{
+
             method: "POST",
             headers: {'content-type': 'application/json',
                     accepts: 'application/json'},

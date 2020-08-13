@@ -92,9 +92,12 @@ class Main extends React.Component {
 
 
   deleteActivity = (id) => {
-    fetch(`https://weatheryoushouldgo-app-api.herokuapp.com/activities/${parseInt(id)}`, {
+    // fetch(`https://weatheryoushouldgo-app-api.herokuapp.com/activities/${parseInt(id)}`, {
+      fetch(`http://localhost:3000/activities/${parseInt(id)}`, {
     method: 'DELETE' })
-    fetch(`https://weatheryoushouldgo-app-api.herokuapp.com/user_activities/${parseInt(id)-4}`, {
+    // fetch(`https://weatheryoushouldgo-app-api.herokuapp.com/user_activities/${parseInt(id)-4}`, {
+      fetch(`http://localhost:3000/user_activities/${parseInt(id)-4}`, {
+
       method: 'DELETE' })
     let activitiesToKeep = this.state.userActivities.filter(activity => activity.id !== id)
     console.log(activitiesToKeep)
